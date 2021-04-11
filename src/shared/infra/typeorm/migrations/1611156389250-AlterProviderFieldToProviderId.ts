@@ -1,5 +1,5 @@
 import { MigrationInterface, QueryRunner, TableColumn, TableForeignKey } from "typeorm";
-import AppointmentsRepository from "../../repositories/AppointmentsRepository";
+import AppointmentsRepository from "@modules/appointments/infra/typeorm/repositories/AppointmentsRepository";
 
 export default class AlterProviderFieldToProviderId1611156389250 implements MigrationInterface {
 
