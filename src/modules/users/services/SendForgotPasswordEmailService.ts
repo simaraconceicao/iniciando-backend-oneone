@@ -1,11 +1,12 @@
+import 'reflect-metadata';
+
 import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError'
 import IUsersRepository from '../repositories/IUsersRepository';
-import IMailProvider from '@shared/container/providers/MailProvider/Models/IMailProvider';
 import IUserTokensRepository from '../repositories/IUserTokensRepository';
+import IMailProvider from '@shared/container/providers/MailProvider/Models/IMailProvider';
 
-// import User from '../infra/typeorm/entities/User'
 
 interface IRequest {
     email: string
@@ -27,15 +28,15 @@ class SendForgotPasswordEmailService {
     public async execute({ email }: IRequest): Promise<void> {
         const user = await this.usersRepository.findByEmail(email);
 
-        if(!user){
+        if (!user) {
             throw new AppError('User does not exists');
         }
 
         await this.userTokensRepository.generate(user.id);
 
-        this.mailProvider.sendMail(
+        await this.mailProvider.sendMail(
             email,
-            'pedido de recuperacao de senha recebido',
+            'Pedido de recuperação de senha recebido',
         )
     }
 

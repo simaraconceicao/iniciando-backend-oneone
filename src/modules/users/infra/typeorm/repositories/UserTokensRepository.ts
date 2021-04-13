@@ -1,4 +1,4 @@
-import { getRepository, Repository, Timestamp } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 
 import UserToken from '../entities/UserToken';
 
@@ -11,7 +11,7 @@ class UserTokensRepository implements IUserTokensRepository {
         this.ormRepository = getRepository(UserToken)
     }
 
-    public async findByToken( token: string): Promise<UserToken | undefined> {
+    public async findByToken(token: string): Promise<UserToken | undefined> {
         const userToken = await this.ormRepository.findOne({
             where: { token },
         });
